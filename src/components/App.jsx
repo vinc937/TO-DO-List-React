@@ -16,6 +16,14 @@ function App() {
     setNewTask("");
   }
 
+  function deleteTask(id) {
+    setTasks((prevVersion) => {
+      return prevVersion.filter((task, index) => {
+        return index !== id;
+      });
+    });
+  }
+
   return (
     <div className="container">
       <div className="heading">
@@ -30,7 +38,14 @@ function App() {
       <div>
         <ul>
           {tasks.map((task, index) => {
-            return <Item key={index} task={task} />;
+            return (
+              <Item
+                key={index}
+                id={index}
+                onCheckedOff={deleteTask}
+                task={task}
+              />
+            );
           })}
         </ul>
       </div>
